@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface AddressRepository extends JpaRepository<Address,Long> {
-    @Query(value = "SELECT * FROM Address WHERE city = 'Amsterdam'", nativeQuery = true)
+    @Query(value = "SELECT * FROM address WHERE city = 'Amsterdam'", nativeQuery = true)
     List<Address> findAddressesInAmsterdam();
 }
