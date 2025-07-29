@@ -20,27 +20,26 @@ public class BankService {
 	@Autowired
 	private EmailSender emailSender;
 	@Autowired
-	private TransactionRecordRepository transactionRecordRepository;
+	private TraceService traceService;
 	
 	@Transactional
 	public void createCustomerAndAccount(int customerId, String customerName, String emailAddress, String AccountNumber){
 
-		String message = "";
+
+		String successMsg = "Customer "+customerName+" "+"created with account "+AccountNumber;
+		String failMsg = "Could not create customer "+customerName+" "+"with account "+AccountNumber;
 		try{
 			Account account = new Account(AccountNumber);
 			accountRepository.save(account);
 			Customer customer = new Customer(customerId, customerName);
 			customer.setAccount(account);
 			customerRepository.saveCustomer(customer);
-			message = "Customer "+customerName+" "+"created with account "+AccountNumber;
-			emailSender.sendEmail(emailAddress, message);
-			TraceRecord tr = new TraceRecord(message);
-			transactionRecordRepository.save(tr);
+			emailSender.sendEmail(emailAddress, successMsg);
+
+			traceService.record(successMsg);
 		}catch(Exception ex){
-			message="Could not create customer "+customerName+" "+"with account "+AccountNumber;
-			emailSender.sendEmail(emailAddress, message);
-			TraceRecord tr = new TraceRecord(message);
-			transactionRecordRepository.save(tr);
+			emailSender.sendEmail(emailAddress, failMsg);
+			traceService.record(failMsg);
 			throw ex;
 		}
 
