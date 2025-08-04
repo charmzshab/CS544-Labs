@@ -13,6 +13,8 @@ import java.time.LocalDate;
 public class SenderApplication implements CommandLineRunner {
     @Autowired
     Sender sender;
+    @Autowired
+    Sender2 sender2;
 
     public static void main(String[] args) {
         SpringApplication.run(SenderApplication.class, args);
@@ -23,6 +25,7 @@ public class SenderApplication implements CommandLineRunner {
         System.out.println("Starting to send a message");
 //        sender.send("topicA", "Hello World");
         sender.send("demo", "Hello world from my app");
+        sender2.send("mynewtopic", "Hello world from sender2");
         System.out.println("Message has been sent");
     }
 }
