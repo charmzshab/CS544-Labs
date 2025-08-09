@@ -22,9 +22,11 @@ public class Lab14PartBSolutionApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        repository.save(new Product("Laptop", "High performance laptop for developers", 1200));
-        repository.save(new Product("Smartphone", "Latest model with great camera", 800));
-        repository.save(new Product("Headphones", "Noise cancelling over-ear headphones", 250));
+        repository.save(new Product("MacBook Pro", "High performance laptop for developers", 1200));
+        repository.save(new Product("Iphone 16", "Latest model with great camera", 800));
+        repository.save(new Product("Beats By Dre", "Noise cancelling over-ear headphones", 250));
+        repository.save(new Product("PlayStation 6", "Best gaming console", 400));
+        repository.save(new Product("HD Pavilion Security Cameras", "Have the security of your home in your palms", 250));
     }
 
     @Bean
